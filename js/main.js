@@ -87,6 +87,16 @@ Vue.component('board-column', {
     `
 })
 
+Vue.component('create-task', {
+    data() {
+        return {
+            title: '',
+            description: '',
+            deadline: ''
+        }
+    },
+})
+
 new Vue({
     el: '#app',
     data: {

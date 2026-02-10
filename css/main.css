@@ -1,0 +1,10 @@
+.columns {
+    display: flex;
+    gap: 15px;
+}
+.column {
+    padding: 10px;
+    border-radius: 6px;
+    width: 25%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
