@@ -66,7 +66,7 @@ Vue.component('task-card', {
 Vue.component('board-column', {
     props: {
         title: String,
-        task: Array,
+        tasks: Array,
         column: String
     },
     template: `
@@ -142,14 +142,18 @@ new Vue({
         }
     },
     methods: {
-        addTask(){
+        addTask(task){
             this.columns.todo.push(task)
             this.save()
         },
 
         editTask(task){
-            task.updatedAt = new Date().toLocaleDateString();
-            const title = prompt('New title', task.title);
+            const title = prompt('New title', task.title)
+            if (title) {
+                task.title = title
+                task.updatedAt = new Date().toLocaleDateString()
+                this.save()
+            }
         },
 
         finishTask(task) {
@@ -167,7 +171,7 @@ new Vue({
                 this.move(task, 'todo', 'inProgress')
             }
             else if (task.status === 'inProgress'){
-                this.moveForward(task, 'inProgress', 'testing')
+                this.move(task, 'inProgress', 'testing')
             }
             else if (task.status === 'testing'){
                 this.finishTask(task)
@@ -177,6 +181,14 @@ new Vue({
         moveBack({ task, reason }) {
             task.returnReason = reason
             this.move(task, 'testing', 'inProgress')
+        },
+
+        move(task, from, to) {
+            this.columns[from] = this.columns[from].filter(t => t.id !== task.id)
+            task.status = to
+            task.updatedAt = new Date().toLocaleDateString()
+            this.columns[to].push(task)
+            this.save()
         },
 
         save() {
@@ -189,7 +201,7 @@ new Vue({
         }
     },
 
-    mounted() {
-        this.load()
-    }
+    // mounted() {
+    //     this.load()
+    // } ждем
 })
