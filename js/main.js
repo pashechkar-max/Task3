@@ -7,6 +7,14 @@ Vue.component('task-card', {
     methods: {
         editTask(){
             this.$emit('edit', this.task);
+        },
+        moveForward(){
+            this.$emit('move-forward', this.task);
+        },
+        moveBack(){
+            const reason = prompt('Please indicate the reason for return');
+            if(!reason) return
+            this.$emit('move-back', { task: this.task, reason });
         }
     },
 
@@ -54,4 +62,12 @@ Vue.component('task-card', {
         </div>
     </div>
     `
+})
+
+Vue.component('board-column', {
+    props: {
+        title: String,
+        task: Array,
+        column: String
+    }
 })
