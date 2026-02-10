@@ -25,7 +25,6 @@ Vue.component('task-card', {
         <p>{{ task.description }}</p>
 
         <small>
-            
             Created: {{ task.createdAt }} <br>
             Updated: {{ task.updatedAt }} <br>
             Deadline: {{ task.deadline }}
@@ -124,7 +123,7 @@ Vue.component('create-task', {
     template: `
     <div class="create-task">
     <input v-model="title" placeholder="title">
-    <textare v-model="description" placeholder="description"></textare>
+    <textarea v-model="description" placeholder="description"></textarea>
     <input type="date" v-model="deadline">
     
     <button @click="create">Create</button>
@@ -147,10 +146,39 @@ new Vue({
             this.columns.todo.push(task)
             this.save()
         },
+
         editTask(task){
             task.updatedAt = new Date().toLocaleDateString();
             const title = prompt('New title', task.title);
         },
+
+        finishTask(task) {
+            const deadline = new Date(task.deadline)
+            const now = new Date()
+
+            task.isOverdue = now > deadline
+            task.isCompletedInTime = now <= deadline
+
+            this.move(task, 'testing', 'done')
+        },
+
+        moveForward(task) {
+            if (task.status === 'todo'){
+                this.move(task, 'todo', 'inProgress')
+            }
+            else if (task.status === 'inProgress'){
+                this.moveForward(task, 'inProgress', 'testing')
+            }
+            else if (task.status === 'testing'){
+                this.finishTask(task)
+            }
+        },
+
+        moveBack({ task, reason }) {
+            task.returnReason = reason
+            this.move(task, 'testing', 'inProgress')
+        },
+
         save() {
             localStorage.setItem('kanban', JSON.stringify(this.columns))
         },
