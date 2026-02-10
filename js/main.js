@@ -95,6 +95,41 @@ Vue.component('create-task', {
             deadline: ''
         }
     },
+    methods:{
+        create(){
+            if (!this.title || !this.deadline) return
+            const now = new Date().toLocaleDateString();
+
+            const task = {
+                id: Date.now(),
+                title: this.title,
+                description: this.description,
+                createdAt: now,
+                updatedAt: now,
+                deadline: this.deadline,
+                status: 'todo',
+                returnReason: null,
+                isOverdue: false,
+                isCompletedInTime: false
+            }
+
+            this.$emit('create', task);
+
+            this.title = ''
+            this.description = ''
+            this.deadline = ''
+
+        }
+    },
+    template: `
+    <div class="create-task">
+    <input v-model="title" placeholder="title">
+    <textare v-model="description" placeholder="description"></textare>
+    <input type="date" v-model="deadline">
+    
+    <button @click="create">Create</button>
+</div>
+`
 })
 
 new Vue({
@@ -108,6 +143,14 @@ new Vue({
         }
     },
     methods: {
+        addTask(){
+            this.columns.todo.push(task)
+            this.save()
+        },
+        editTask(task){
+            task.updatedAt = new Date().toLocaleDateString();
+            const title = prompt('New title', task.title);
+        },
         save() {
             localStorage.setItem('kanban', JSON.stringify(this.columns))
         },
