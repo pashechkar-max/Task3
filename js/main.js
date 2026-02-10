@@ -69,5 +69,46 @@ Vue.component('board-column', {
         title: String,
         task: Array,
         column: String
+    },
+    template: `
+    <div class="column">
+    <h2>{{ title }}</h2>
+    
+    <task-card
+        v-for="task in tasks"
+        :key="task.id"
+        :task="task"
+        :column="column"
+        @edit="$emit('edit', $event)"
+        @move-forward="$emit('move-forward', $event)"
+        @move-back="$emit('move-back', $event)"
+    ></task-card>
+    </div>
+    `
+})
+
+new Vue({
+    el: '#app',
+    data: {
+        columns: {
+            todo: [],
+            inProgress: [],
+            testing: [],
+            done: []
+        }
+    },
+    methods: {
+        save() {
+            localStorage.setItem('kanban', JSON.stringify(this.columns))
+        },
+
+        load() {
+            const data = localStorage.getItem('kanban')
+            if (data) this.columns = JSON.parse(data)
+        }
+    },
+
+    mounted() {
+        this.load()
     }
 })
