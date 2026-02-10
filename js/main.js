@@ -97,7 +97,7 @@ Vue.component('create-task', {
     methods:{
         create(){
             if (!this.title || !this.deadline) return
-            const now = new Date().toLocaleDateString();
+            const now = new Date().toLocaleDateString('ru-RU');
 
             const task = {
                 id: Date.now(),
@@ -105,7 +105,7 @@ Vue.component('create-task', {
                 description: this.description,
                 createdAt: now,
                 updatedAt: now,
-                deadline: this.deadline,
+                deadline: new Date(this.deadline).toLocaleDateString('ru-RU'),
                 status: 'todo',
                 returnReason: null,
                 isOverdue: false,
@@ -151,7 +151,7 @@ new Vue({
             const title = prompt('New title', task.title)
             if (title) {
                 task.title = title
-                task.updatedAt = new Date().toLocaleDateString()
+                task.updatedAt = new Date().toLocaleDateString('ru-RU')
                 this.save()
             }
         },
@@ -186,7 +186,7 @@ new Vue({
         move(task, from, to) {
             this.columns[from] = this.columns[from].filter(t => t.id !== task.id)
             task.status = to
-            task.updatedAt = new Date().toLocaleDateString()
+            task.updatedAt = new Date().toLocaleDateString('ru-RU')
             this.columns[to].push(task)
             this.save()
         },
