@@ -25,9 +25,9 @@ Vue.component('task-card', {
         <p>{{ task.description }}</p>
 
         <small>
-            Created: {{ task.createdAt }} <br>
-            Updated: {{ task.updatedAt }} <br>
-            Deadline: {{ task.deadline }}
+            created: {{ task.createdAt }} <br>
+            updated: {{ task.updatedAt }} <br>
+            deadline: {{ task.deadline }}
         </small>
 
         <p v-if="task.returnReason">
