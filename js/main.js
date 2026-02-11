@@ -56,7 +56,7 @@ Vue.component('task-card', {
             </span>
 
             <span v-if="task.isCompletedInTime" class="ok">
-                Completed in time
+                Completed in time!
             </span>
         </div>
     </div>
