@@ -140,3 +140,7 @@ b{
     color: #fff;
     font-weight: 400;
 }
+
+#delete:hover{
+    background: rgba(234, 44, 44, 0.73);
+}
