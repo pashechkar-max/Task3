@@ -128,8 +128,15 @@ b{
     color: rgba(255, 51, 51, 0.73);
 }
 
-.ok{
+.ok,
+.overdue {
     display: flex;
     align-items: flex-end;
     padding: 6px 12px;
+}
+
+#delete{
+    background: #FF3333BA;
+    color: #fff;
+    font-weight: 400;
 }

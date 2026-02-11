@@ -41,15 +41,17 @@ Vue.component('task-card', {
                 v-if="column !== 'done'" 
                 @click="moveForward"
             >
-                ->
+                >
             </button>
 
             <button 
                 v-if="column === 'testing'" 
                 @click="moveBack"
             >
-                <- Return
+                < Return
             </button>
+
+            <button id="delete" @click="$emit('delete', task)">Delete</button>
 
             <span v-if="task.isOverdue" class="overdue">
                 Overdue
@@ -78,6 +80,7 @@ Vue.component('board-column', {
         :key="task.id"
         :task="task"
         :column="column"
+        @delete="$emit('delete', $event)"
         @edit="$emit('edit', $event)"
         @move-forward="$emit('move-forward', $event)"
         @move-back="$emit('move-back', $event)"
@@ -171,12 +174,19 @@ new Vue({
             }
         },
 
+        deleteTask(task) {
+            this.columns[task.status] =
+                this.columns[task.status].filter(t => t.id !== task.id)
+            this.save()
+        },
+
         finishTask(task) {
             const deadline = new Date(task.deadlineRaw)
             const now = new Date()
 
             task.isOverdue = now > deadline
             task.isCompletedInTime = now <= deadline
+            task.returnReason = null
 
             this.move(task, 'testing', 'done')
         },
@@ -194,7 +204,7 @@ new Vue({
         },
 
         moveBack({ task, reason }) {
-            task.returnReason = null
+            task.returnReason = reason
             this.move(task, 'testing', 'inProgress')
         },
 
