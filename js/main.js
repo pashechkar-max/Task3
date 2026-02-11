@@ -73,7 +73,7 @@ Vue.component('board-column', {
     <div class="column">
     <h2>{{ title }}</h2>
     
-    <task-card
+    <task-card class="task-card"
         v-for="task in tasks"
         :key="task.id"
         :task="task"
@@ -121,12 +121,19 @@ Vue.component('create-task', {
         }
     },
     template: `
+<div class="start">
+    <div class="start-text">
+    <h1>TASK3</h1>
+    <p></p>
+</div>
     <div class="create-task">
+    <h2>Create your note</h2>
     <input v-model="title" placeholder="title">
     <textarea v-model="description" placeholder="description"></textarea>
     <input type="date" v-model="deadline">
     
-    <button @click="create">Create</button>
+    <button class="create" @click="create">Create</button>
+    </div>
 </div>
 `
 })
@@ -201,7 +208,8 @@ new Vue({
         }
     },
 
-    // mounted() {
-    //     this.load()
-    // } ждем
+    mounted() {
+        this.load()
+    }
+    // ждем
 })
