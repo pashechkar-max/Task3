@@ -124,7 +124,14 @@ Vue.component('create-task', {
 <div class="start">
     <div class="start-text">
     <h1>TASK3</h1>
-    <p></p>
+    <p>
+        A web application for managing notes.<br>
+    </p>
+    <p>
+     Supports creating, editing,
+        and moving tasks between stages
+        with deadline control and data saving.
+</p>
 </div>
     <div class="create-task">
     <h2>Create your note</h2>
