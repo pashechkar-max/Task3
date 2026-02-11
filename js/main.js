@@ -106,6 +106,7 @@ Vue.component('create-task', {
                 createdAt: now,
                 updatedAt: now,
                 deadline: new Date(this.deadline).toLocaleDateString('ru-RU'),
+                deadlineRaw: this.deadline,
                 status: 'todo',
                 returnReason: null,
                 isOverdue: false,
@@ -171,7 +172,7 @@ new Vue({
         },
 
         finishTask(task) {
-            const deadline = new Date(task.deadline)
+            const deadline = new Date(task.deadlineRaw)
             const now = new Date()
 
             task.isOverdue = now > deadline
@@ -193,7 +194,7 @@ new Vue({
         },
 
         moveBack({ task, reason }) {
-            task.returnReason = reason
+            task.returnReason = null
             this.move(task, 'testing', 'inProgress')
         },
 
