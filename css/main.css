@@ -4,26 +4,20 @@
 
 .columns {
     display: flex;
-    gap: 8px;
     margin: 8vh 5vw 0;
 }
 .column {
-    padding: 20px;
+    padding: 8px;
     border-radius: 6px;
     width: 25%;
-    /*box-shadow: 0 2px 5px rgba(0,0,0,0.1);*/
     transition: all 0.5s ease-in-out;
 }
-
-/*.column:hover {*/
-/*    box-shadow: 0 3px 10px rgba(0,0,0,0.11);*/
-/*}*/
 
 .card {
     background: #ffffff;
     border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 12px;
+    padding: 18px;
+    margin-bottom: 8px;
     box-shadow: 1px 1px 10px rgba(225, 227, 255, 0.73);
 }
 
@@ -61,10 +55,11 @@
     color: #011a39;
     font-weight: 600;
     margin-top: 12px;
+    transition: 0.2s ease-in-out;
 }
 
 .actions button:hover {
-    background: #e1e3ff;
+    background: #c9cdff;
 }
 
 .create-task{
@@ -104,6 +99,12 @@ textarea {
     font-weight: 600;
     font-size: 14px;
     color: #011a39;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.create:hover {
+    background: #c9cdff;
 }
 
 .start{
@@ -120,7 +121,6 @@ textarea {
 }
 
 h2{
-    text-align: center;
     color: #000;
 }
 
