@@ -58,7 +58,9 @@ Vue.component('task-card', {
                 Delete
             </button>
 
-            <span v-if="task.isOverdue" class="overdue">
+            <span 
+                v-if="task.status !== 'done' && new Date() > new Date(task.deadlineRaw)"
+                class="overdue">
                 Overdue
             </span>
 
@@ -117,7 +119,6 @@ Vue.component('create-task', {
                 deadlineRaw: this.deadline,
                 status: 'todo',
                 returnReason: null,
-                isOverdue: false,
                 isCompletedInTime: false
             }
 
@@ -154,6 +155,8 @@ Vue.component('create-task', {
 `
 })
 
+Vue.component('column', {})
+
 new Vue({
     el: '#app',
     data: {
@@ -171,12 +174,29 @@ new Vue({
         },
 
         editTask(task){
+
+            const isOverdue =
+                task.status !== 'done' &&
+                new Date() > new Date(task.deadlineRaw)
+
+            if (isOverdue) {
+                alert('The date of overdue notes cannot be changed')
+                return
+            }
+
             const title = prompt('New title', task.title)
             if (title) {
                 task.title = title
-                task.updatedAt = new Date().toLocaleString('ru-RU')
-                this.save()
             }
+
+            const newDeadline = prompt('New deadline', task.deadlineRaw)
+            if (newDeadline) {
+                task.deadlineRaw = newDeadline
+                task.deadline = new Date(newDeadline).toLocaleString('ru-RU')
+            }
+
+            task.updatedAt = new Date().toLocaleString('ru-RU')
+            this.save()
         },
 
         deleteTask(task) {
