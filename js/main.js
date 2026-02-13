@@ -196,6 +196,7 @@ Vue.component('board-now-vue', {
         ></board-column>
     </div>
     `
+
 })
 
 new Vue({
