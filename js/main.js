@@ -163,40 +163,38 @@ Vue.component('board-now-vue', {
     template: `
     <div class="columns">
         <board-column
-                title="To Do >>>"
-                column="todo"
-                :tasks="columns.todo"
-                @edit="editTask"
-                @move-forward="moveForward"
-                @delete="deleteTask"
+            title="To Do >>>"
+            column="todo"
+            :tasks="columns.todo"
+            @edit="$emit('edit', $event)"
+            @move-forward="$emit('move-forward', $event)"
+            @delete="$emit('delete', $event)"
         ></board-column>
 
         <board-column
-                title="In Progress >>"
-                column="inProgress"
-                :tasks="columns.inProgress"
-                @edit="editTask"
-                @move-forward="moveForward"
-
+            title="In Progress >>"
+            column="inProgress"
+            :tasks="columns.inProgress"
+            @edit="$emit('edit', $event)"
+            @move-forward="$emit('move-forward', $event)"
         ></board-column>
 
         <board-column
-                title="Testing >"
-                column="testing"
-                :tasks="columns.testing"
-                @edit="editTask"
-                @move-forward="moveForward"
-                @move-back="moveBack"
+            title="Testing >"
+            column="testing"
+            :tasks="columns.testing"
+            @edit="$emit('edit', $event)"
+            @move-forward="$emit('move-forward', $event)"
+            @move-back="$emit('move-back', $event)"
         ></board-column>
 
         <board-column
-                title="Done ."
-                column="done"
-                :tasks="columns.done"
+            title="Done ."
+            column="done"
+            :tasks="columns.done"
         ></board-column>
     </div>
     `
-
 })
 
 new Vue({
