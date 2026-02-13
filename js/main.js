@@ -208,11 +208,8 @@ new Vue({
         finishTask(task) {
             const deadline = new Date(task.deadlineRaw)
             const now = new Date()
-
-            task.isOverdue = now > deadline
             task.isCompletedInTime = now <= deadline
             task.returnReason = null
-
             this.move(task, 'testing', 'done')
         },
 
