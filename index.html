@@ -26,7 +26,7 @@
                 :tasks="columns.inProgress"
                 @edit="editTask"
                 @move-forward="moveForward"
-                @delete="deleteTask"
+
         ></board-column>
 
         <board-column
@@ -36,14 +36,12 @@
                 @edit="editTask"
                 @move-forward="moveForward"
                 @move-back="moveBack"
-                @delete="deleteTask"
         ></board-column>
 
         <board-column
                 title="Done ."
                 column="done"
                 :tasks="columns.done"
-                @delete="deleteTask"
         ></board-column>
     </div>
 </div>
